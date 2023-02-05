@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <meta http-equiv="refresh" content="60">
+</head>
+<html>
+
+<body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1>Top Stocks</h1>
+    <div class="periodic-table">
+        {% for ticker in tickers %}
+        <div class="periodic-element {{ 'negative' if ticker.changes < 0 else 'positive'}}">
+            <div class="periodic-element-inner">
+                <div class="title">{{ ticker.symbol }}</div>
+                <div class="description">${{ '%0.2f' % ticker.price | float }}</div>
+                <div class="description">{{ '+' if ticker.changes > 0 }}{{ '%0.2f' % ticker.changes | float }} <i class="fas {{ 'fa-arrow-down' if ticker.changes < 0 else 'fa-arrow-up' }}"></i></div>
+                <div class="description">({{ (100 * ticker.changes / ticker.price) | abs | round(2, 'floor') }}%)</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</html>
