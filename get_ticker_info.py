@@ -18,14 +18,16 @@ def get_ticker_info(tickers):
         response = future.result().text
 
         try:
-            price = float(re.search(r'"price" content="\$(.*?)" />', response).group(1))
+            price = float(re.search(r'"price" content="\$(.*?)"', response).group(1))
         except Exception:
             continue
 
-        changes = float(re.search(r'"priceChange" content="(.*?)" />', response).group(1))
+        name = re.search(r'"name" content="(.*?)"', response).group(1)
+        changes = float(re.search(r'"priceChange" content="(.*?)"', response).group(1))
 
         tickers.append(
             {
+                "name": name,
                 "changes": changes,
                 "symbol": futures[future],
                 "price": price,

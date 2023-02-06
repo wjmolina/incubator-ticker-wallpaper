@@ -20,7 +20,7 @@
     <h1>Top Stocks</h1>
     <div class="periodic-table">
         {% for ticker in tickers %}
-        <div class="periodic-element {{ 'negative' if ticker.changes < 0 else 'positive'}}">
+        <div class="periodic-element {{ 'negative' if ticker.changes < 0 else 'positive'}}" data-description="{{ ticker.name }}">
             <div class="periodic-element-inner">
                 <div class="title">{{ ticker.symbol }}</div>
                 <div class="description">${{ '%0.2f' % ticker.price | float }}</div>
